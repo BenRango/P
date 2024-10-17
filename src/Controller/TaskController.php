@@ -27,7 +27,6 @@ class TaskController extends AbstractController
     #[Route('/api/tasks/{id}', name: 'detailTask', methods:["GET"])]
     public function getTaskById(int $id, TaskRepository $taskRepository, SerializerInterface $serializer) : JsonResponse
     {
-        $task = $taskRepository->find($id);
         if ($task) 
         {
             $jsonTask= $serializer->serialize($task, 'json'/*, ['groups' => 'getTasks']*/);
