@@ -41,11 +41,16 @@ class Task
     private ?bool $modified = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['getTasks'])]
     private ?string $latestModificationDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['getTasks'])]
     private ?User $user = null;
+
+    #[ORM\Column]
+    private ?int $userId = null;
 
     public function getId(): ?int
     {
@@ -132,6 +137,18 @@ class Task
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): static
+    {
+        $this->userId = $userId;
 
         return $this;
     }
