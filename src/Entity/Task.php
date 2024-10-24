@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,22 +13,31 @@ class Task
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['getTasks'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull]
+    #[Groups(['getTasks'])]
     private ?string $label = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Groups(['getTasks'])]
     private ?bool $state = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['getTasks'])]
+    #[Assert\NotNull]
     private ?string $creationDate = null;
 
+    #[Groups(['getTasks'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $completionDate = null;
 
     #[ORM\Column]
+    #[Groups(['getTasks'])]
+    #[Assert\NotNull]
     private ?bool $modified = null;
 
     #[ORM\Column(length: 255, nullable: true)]
