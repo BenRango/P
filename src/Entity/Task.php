@@ -52,6 +52,10 @@ class Task
     #[ORM\Column]
     private ?int $userId = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['getTasks'])]
+    private ?string $deadline = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -149,6 +153,18 @@ class Task
     public function setUserId(int $userId): static
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getDeadline(): ?string
+    {
+        return $this->deadline;
+    }
+
+    public function setDeadline(?string $deadline): static
+    {
+        $this->deadline = $deadline;
 
         return $this;
     }
